@@ -1,0 +1,22 @@
+import smbus
+import time
+
+#initialize the slave address 05
+slave_address = 0x05
+bus = smbus.SMBus(1)
+
+# this loop keep reading the recived results and print text
+while True:
+    data = bus.read_byte(slave_address) #to request and read recieved data
+    if data >= 150:
+        Vi = 'too bright'
+    elif data < 150 and data >= 120:
+        Vi = 'bright'
+    elif data < 120 and data >= 70:
+        Vi = 'medium'
+    elif data <70 and data >= 30:
+        Vi = 'dark'
+    else:
+        Vi = 'too dark'
+    print(Vi)
+    time.sleep(2)
