@@ -1,0 +1,31 @@
+#include <Wire.h>
+
+// initialize the address
+#define Address 0x05
+int photoresistor = A0;
+int analogvalue;
+
+void setup() {
+    
+    // initialize argon to be slave
+    Wire.begin(Address);
+    
+    // send data when requested
+    Wire.onRequest(dataToSend);
+    
+    pinMode(photoresistor, INPUT);
+
+}
+
+void loop() {
+    delay(500);
+}
+
+
+// sending data function
+void dataToSend(){
+    analogvalue = analogRead(photoresistor);
+    Wire.write(analogvalue);
+}
+        
+    
